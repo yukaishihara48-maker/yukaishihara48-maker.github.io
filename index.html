@@ -3,85 +3,696 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>石原裕香 - プロフィール</title>
+  <title>石原裕香 - 構想士・循環士・研究者</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
+    :root {
+      --primary: #1a365d;
+      --primary-light: #2d5a8b;
+      --secondary: #e2e8f0;
+      --accent: #f7fafc;
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --text-light: #718096;
+      --white: #ffffff;
+      --gradient-primary: linear-gradient(135deg, #1a365d 0%, #2d5a8b 100%);
+      --gradient-secondary: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      box-sizing: border-box;
     }
-    header {
-      background: #004466;
-      color: white;
-      padding: 4rem 2rem;
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    .hero {
+      background: var(--gradient-primary);
+      color: var(--white);
+      padding: 8rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
       text-align: center;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      opacity: 0.9;
     }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-    h2 {
-      color: #004466;
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
       margin-top: 2rem;
     }
-    footer {
-      background: #eee;
+
+    .badge {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .badge:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 4rem 0;
+    }
+
+    .section {
+      margin-bottom: 6rem;
+    }
+
+    .section-header {
       text-align: center;
-      padding: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .about-visual {
+      background: var(--gradient-secondary);
+      padding: 3rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-visual::before {
+      content: '構想';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(26, 54, 93, 0.1);
+      transform: rotate(-15deg);
+    }
+
+    .about-visual::after {
+      content: '循環';
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(26, 54, 93, 0.1);
+      transform: rotate(15deg);
+    }
+
+    /* Activities Section */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       margin-top: 3rem;
     }
-    a {
-      color: #004466;
+
+    .activity-card {
+      background: var(--white);
+      border: 1px solid var(--secondary);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .activity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-primary);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    .activity-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .activity-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Philosophy Section */
+    .philosophy-content {
+      background: var(--gradient-secondary);
+      padding: 4rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%231a365d" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    }
+
+    .philosophy-text {
+      position: relative;
+      z-index: 2;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .philosophy-process {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .process-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .process-step::after {
+      content: '→';
+      margin-left: 0.5rem;
+      opacity: 0.5;
+    }
+
+    .process-step:last-child::after {
+      display: none;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--secondary);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--white);
+      font-size: 1.5rem;
+    }
+
+    .contact-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-link {
+      color: var(--text-secondary);
       text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-link:hover {
+      color: var(--primary);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 6rem;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-text {
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .footer-signature {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero {
+        padding: 6rem 0 4rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .philosophy-content {
+        padding: 2rem;
+      }
+
+      .philosophy-process {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .process-step::after {
+        content: '↓';
+        transform: rotate(90deg);
+      }
+
+      .activities-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Focus styles for accessibility */
+    a:focus,
+    button:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>石原 裕香</h1>
-    <p>構想士・循環士 | 起業塾副顧問 | 大学研究者</p>
-  </header>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-content">
+      <div class="nav-logo">石原裕香</div>
+      <ul class="nav-links">
+        <li><a href="#about">わたしについて</a></li>
+        <li><a href="#activities">主な活動</a></li>
+        <li><a href="#philosophy">哲学とスタンス</a></li>
+        <li><a href="#contact">連絡先</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <section>
-    <h2>わたしについて</h2>
-    <p>
-      哲学を起点に、学生・地域・社会に向けた構想と実装を行う研究者・実践者。大学にて研究を続けながら、地域における起業支援や制度設計、社会的イノベーションの現場にも携わる。直感・身体性・感覚を大切にし、問いを投げ、構想し、伴走する人。
-    </p>
-
-    <h2>主な活動</h2>
-    <ul>
-      <li><strong>Ehime Startup Clam School：</strong>副顧問として地域学生の起業支援</li>
-      <li><strong>GAPファンド（STEP2）申請：</strong>地域イントレプレナー育成研究</li>
-      <li><strong>YONBOX構想：</strong>Clickを用いた共創アプリを開発・発表予定</li>
-      <li><strong>Note執筆：</strong>マレーシアからの気づきと探究を発信中</li>
-    </ul>
-
-    <h2>哲学とスタンス</h2>
-    <p>
-      私の関わり方は「問い→構想→伴走」。誰かの声にならない違和感や願いを汲みとり、言語と構造へと翻訳し、ともに歩むプロセスを大切にしています。MITやアジア各地の知とつなぎながら、愛媛というローカルからグローバルへの発信も行っています。
-    </p>
-
-    <h2>リンク・連絡先</h2>
-    <ul>
-      <li><a href="https://note.com/" target="_blank">Note（記事執筆中）</a></li>
-      <li><a href="https://www.instagram.com/zero2maker" target="_blank">Instagram（Zero2Maker）</a></li>
-      <li><a href="mailto:yukaishihara48@gmail.com">yukaishihara48@gmail.com</a></li>
-    </ul>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1 class="fade-in-up">石原 裕香</h1>
+      <p class="hero-subtitle fade-in-up">構想士・循環士 | 起業塾副顧問 | 大学研究者</p>
+      <div class="hero-badges fade-in-up">
+        <span class="badge">研究者</span>
+        <span class="badge">実践者</span>
+        <span class="badge">伴走者</span>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    &copy; 2025 石原裕香. All rights reserved.
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- About Section -->
+      <section id="about" class="section">
+        <div class="section-header">
+          <h2 class="section-title">わたしについて</h2>
+          <p class="section-subtitle">哲学を起点に、学生・地域・社会に向けた構想と実装を行う研究者・実践者</p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              哲学を起点に、学生・地域・社会に向けた構想と実装を行う研究者・実践者。大学にて研究を続けながら、地域における起業支援や制度設計、社会的イノベーションの現場にも携わる。直感・身体性・感覚を大切にし、問いを投げ、構想し、伴走する人。
+            </p>
+          </div>
+          <div class="about-visual">
+            <h3 style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;">構想 × 循環</h3>
+            <p style="color: var(--text-secondary);">問いから始まり、実践へとつながる</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Activities Section -->
+      <section id="activities" class="section">
+        <div class="section-header">
+          <h2 class="section-title">主な活動</h2>
+          <p class="section-subtitle">現在進行中のプロジェクトと取り組み</p>
+        </div>
+        <div class="activities-grid">
+          <div class="activity-card">
+            <h3 class="activity-title">Ehime Startup Clam School</h3>
+            <p class="activity-description">副顧問として地域学生の起業支援を行い、愛媛から新しいイノベーションを生み出す取り組みをサポートしています。</p>
+          </div>
+          <div class="activity-card">
+            <h3 class="activity-title">GAPファンド（STEP2）申請</h3>
+            <p class="activity-description">地域イントレプレナー育成研究として、地域における起業家精神の醸成と実践的な支援システムの構築を目指しています。</p>
+          </div>
+          <div class="activity-card">
+            <h3 class="activity-title">YONBOX構想</h3>
+            <p class="activity-description">Clickを用いた共創アプリを開発・発表予定。地域の課題解決とコミュニティ形成をテクノロジーで支援するプロジェクトです。</p>
+          </div>
+          <div class="activity-card">
+            <h3 class="activity-title">Note執筆</h3>
+            <p class="activity-description">マレーシアからの気づきと探究を発信中。国際的な視点から地域発展の可能性を探求し、知見を共有しています。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Philosophy Section -->
+      <section id="philosophy" class="section">
+        <div class="section-header">
+          <h2 class="section-title">哲学とスタンス</h2>
+          <p class="section-subtitle">私の関わり方とアプローチ</p>
+        </div>
+        <div class="philosophy-content">
+          <p class="philosophy-text">
+            私の関わり方は「問い→構想→伴走」。誰かの声にならない違和感や願いを汲みとり、言語と構造へと翻訳し、ともに歩むプロセスを大切にしています。MITやアジア各地の知とつなぎながら、愛媛というローカルからグローバルへの発信も行っています。
+          </p>
+          <div class="philosophy-process">
+            <div class="process-step">問い</div>
+            <div class="process-step">構想</div>
+            <div class="process-step">伴走</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section">
+        <div class="section-header">
+          <h2 class="section-title">リンク・連絡先</h2>
+          <p class="section-subtitle">お気軽にお声がけください</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">📝</div>
+            <h3 class="contact-title">Note</h3>
+            <a href="https://note.com/" target="_blank" class="contact-link">記事執筆中</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">📸</div>
+            <h3 class="contact-title">Instagram</h3>
+            <a href="https://www.instagram.com/zero2maker" target="_blank" class="contact-link">@zero2maker</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <h3 class="contact-title">Email</h3>
+            <a href="mailto:yukaishihara48@gmail.com" class="contact-link">yukaishihara48@gmail.com</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">🎮</div>
+            <h3 class="contact-title">Cash Flow Game</h3>
+            <a href="cash-flow-game/" class="contact-link">お金の流れゲーム</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-text">構想と実践の先にある、新しい可能性を一緒に探求しましょう</p>
+      <p class="footer-signature">&copy; 2025 石原裕香. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (window.scrollY > 100) {
+        nav.style.background = 'rgba(255, 255, 255, 0.98)';
+        nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        nav.style.background = 'rgba(255, 255, 255, 0.95)';
+        nav.style.boxShadow = 'none';
+      }
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections for animation
+    document.querySelectorAll('.section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
